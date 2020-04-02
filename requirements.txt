@@ -1,2 +1,0 @@
-responder==2.0.5
-marshmallow==3.5.1

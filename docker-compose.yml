@@ -1,0 +1,11 @@
+version: "3.1"
+
+services:
+  recognizer:
+    build: ./recognizer/
+    ports:
+      - "5042:5042"
+    volumes:
+      - ./recognizer:/recognizer
+      - ./images:/images
+    working_dir: /recognizer

@@ -118,4 +118,5 @@ async def register(req, resp):
         # resp.content = api.template('index.html', message="It's {}!".format(name))
 
 if __name__ == "__main__":
-    api.run()
+    print("main!")
+    api.run(address='0.0.0.0', port=80)

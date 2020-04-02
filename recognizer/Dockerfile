@@ -1,20 +1,35 @@
-# ベースイメージの指定
-FROM python:3.6
-# ENV PYTHONUNBUFFERED 1
-# RUN mkdir -p /var/www
-# WORKDIR /var/www
-# ENV PYTHONDONTWRITEBYTECODE 1
-# ENV DEBIAN_FRONTEND noninteractive
-# ENV DOCKER true
-# RUN apt-get update
-# RUN apt-get install -y build-essential cmake pkg-config
-# RUN apt-get install -y libx11-dev libatlas-base-dev
-# RUN apt-get install -y libgtk-3-dev libboost-python-dev
+FROM python:3.6-slim-stretch
+
+RUN apt-get -y update
+RUN apt-get install -y --fix-missing \
+    build-essential \
+    cmake \
+    gfortran \
+    git \
+    wget \
+    curl \
+    graphicsmagick \
+    libgraphicsmagick1-dev \
+    libatlas-base-dev \
+    libavcodec-dev \
+    libavformat-dev \
+    libgtk2.0-dev \
+    libjpeg-dev \
+    liblapack-dev \
+    libswscale-dev \
+    pkg-config \
+    python3-dev \
+    python3-numpy \
+    software-properties-common \
+    zip \
+    && apt-get clean && rm -rf /tmp/* /var/tmp/*
+
+RUN cd ~ && \
+    mkdir -p dlib && \
+    git clone -b 'v19.9' --single-branch https://github.com/davisking/dlib.git dlib/ && \
+    cd  dlib/ && \
+    python3 setup.py install --yes USE_AVX_INSTRUCTIONS
 
 ADD . /recognizer
-RUN ls /recognizer
 WORKDIR /recognizer
-# RUN pip install --upgrade cython
-RUN pip install --upgrade pip --ignore-installed -r requirements.txt
-# RUN pip install -r requirements.txt
-CMD python face_recognizer.py
+RUN pip3 install --upgrade pip --ignore-installed -r requirements.txt

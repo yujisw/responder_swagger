@@ -1,11 +1,21 @@
 version: "3.1"
 
 services:
+  nginx:
+    build: ./nginx/
+    ports:
+      - "80:80"
+    volumes:
+      - "./nginx/nginx.conf:/etc/nginx/conf.d/default.conf"
+      - "./nginx/.htpasswd:/etc/nginx/.htpasswd"
+    links:
+      - recognizer
   recognizer:
     build: ./recognizer/
-    ports:
-      - "5042:5042"
+    expose:
+      - "80"
     volumes:
       - ./recognizer:/recognizer
       - ./images:/images
     working_dir: /recognizer
+    command: /bin/sh -c "python face_recognizer.py"

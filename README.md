@@ -11,7 +11,7 @@ Access to http://0.0.0.0/recognizer
 or  
 use curl command
 ```
-curl -X POST -F file=@./images/test/kamiki.jpg http://localhost/recognizer
+curl -X POST -F file=@{path/to/image} http://localhost/recognizer
 ```
 
 ## 顔登録
@@ -19,7 +19,7 @@ Access to http://0.0.0.0/register
 or  
 use curl command
 ```
-curl -X POST -F file=@./images/test/kamiki.jpg -F name="kamiki2" http://localhost/register
+curl -X POST -F file=@{path/to/image} -F name={name you want to register} http://localhost/register
 ```
 
 ## 登録済み画像

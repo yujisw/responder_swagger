@@ -1,5 +1,5 @@
 responder==2.0.5
 marshmallow==3.5.1
-numpy==1.16.2
+numpy==1.22.0
 face-recognition==1.3.0
 Pillow==6.0.0
